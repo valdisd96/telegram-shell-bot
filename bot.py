@@ -43,10 +43,9 @@ def restricted(func):
     def wrapped(update, context, *args, **kwargs):
         user_id = update.effective_user.id
         if not (user_id in settings.ENABLED_USERS or -999999 in settings.ENABLED_USERS):
-            print(f"Unauthorized access denied for {user_id}.")
+            logger.info(f"Unauthorized access denied for {user_id}.")
             return
         return func(update, context, *args, **kwargs)
-
     return wrapped
 
 
